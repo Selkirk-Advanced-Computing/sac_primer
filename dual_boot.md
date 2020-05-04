@@ -2,6 +2,30 @@
 Dual-Booting
 : Two operating systems installed on a single PC
 
+## Table of Contents
+   * [Dual Boot Ubuntu &amp; Windows](#dual-boot-ubuntu--windows)
+      * [Table of Contents](#table-of-contents)
+      * [What is dual booting?](#what-is-dual-booting)
+      * [Cost/Benefit](#costbenefit)
+      * [Requirements](#requirements)
+      * [Steps](#steps)
+         * [1. Back up Windows](#1-back-up-windows)
+            * [Create a recovery disk](#create-a-recovery-disk)
+            * [Create a system image backup](#create-a-system-image-backup)
+            * [Recover your PC](#recover-your-pc)
+         * [Prep Windows Partition for Resizing](#prep-windows-partition-for-resizing)
+         * [3. Get Ubuntu](#3-get-ubuntu)
+         * [4. Partition with Windows (choose step 4 or 6)](#4-partition-with-windows-choose-step-4-or-6)
+         * [5. Install Ubuntu](#5-install-ubuntu)
+         * [6. Partition with GParted (choose step 4 or 6)](#6-partition-with-gparted-choose-step-4-or-6)
+       * [Partitioning](#partitioning)
+          * [My Partition Scheme](#my-partition-scheme)
+          * [GPT Disks](#gpt-disks)
+          * [Partition Schemes](#partition-schemes)
+          * [Partition Sizes](#partition-sizes)
+      * [Next Steps](#next-steps)
+
+## What is dual booting?
 Dual booting works by splitting a hard drive with an existing operating system (OS) into multiple [**partitions**](https://www.howtogeek.com/184659/beginner-geek-hard-disk-partitions-explained/) and installing another OS into the newly created partition. Each partition is separate from the others and contained unless specially accessed. Once the computer is dual booting, a boot manager will allow the user to choose which OS to boot at each startup. It's also possible to boot from a portable OS on a portable memory drive with either the boot manager or your Basic Input Output System (BIOS). This guide will cover how to dual boot Windows and the recently released Ubuntu 20.04 LTS in the case where Windows is already installed.
 
 * If you prefer to follow official documentation, here are the [Ubuntu Docs](https://help.ubuntu.com/community/WindowsDualBoot) describing the process. Please note these are dated and not comprehensive.
@@ -21,11 +45,11 @@ Cons
 * Takes up extra hard drive space
 
 ## Requirements
-* $\ge$ 16 GB USB for a windows recovery drive
+* <img src="https://latex.codecogs.com/svg.latex?\;\ge" title="Greater than or Equal to"/> 16 GB USB for a windows recovery drive
 * Large USB or external hard drive for system backup
-* Windows machine with free $\ge$ 25GB hard drive space
-* $\ge$ 4 GB USB stick for Ubuntu Live
-* About 4 free hours, dependant on speed of internet & the computer
+* Windows machine with free <img src="https://latex.codecogs.com/svg.latex?\;\ge" title="Greater than or Equal to"/> 30 GB hard drive space
+* <img src="https://latex.codecogs.com/svg.latex?\;\ge" title="Greater than or Equal to"/> 4 GB USB stick for Ubuntu Live
+* Likely more than 4 free hours, dependant on speed of internet & the computer
 
 ## Steps
 ### 1. Back up Windows
@@ -54,7 +78,7 @@ Resizing your Windows partition will take a long time. Note that defragging may 
 	2.1 Search "defrag" or go `Control Panel --> System and Security --> Administrative Tools --> Defrag`
 
 ### 3. Get Ubuntu
-A bootable Ubuntu USB stick is the easiest way to try or install Ubuntu. The official [guide](https://ubuntu.com/tutorials/tutorial-create-a-usb-stick-on-windows#1-overview) is very clear and thorough. ==flesh this out if extra time==
+A bootable Ubuntu USB stick is the easiest way to try or install Ubuntu. The official [guide](https://ubuntu.com/tutorials/tutorial-create-a-usb-stick-on-windows#1-overview) is very clear and thorough. 
 
 ### 4. Partition with Windows (choose step 4 or 6)
 At this point you can choose to repartition with Windows now, or with GParted during the installation. Do your own research as to which is safer or better as there does not seem to be universal agreement. 
@@ -73,29 +97,29 @@ This [guide](https://askubuntu.com/questions/343268/how-to-use-manual-partitioni
 1. Click on the `Manually edit partition table` option. 
 2. Choose a [partition scheme](#partition-scheme) and complete the installation
 
-### Partition Scheme
+## Partitioning
 Ubuntu docs have an [extensive partitioning guide](https://help.ubuntu.com/community/HowtoPartition) and a [good guide](https://help.ubuntu.com/community/DiskSpace) for partition schemes.
 
-#### My Partition Scheme
+### My Partition Scheme
 The partition scheme running in my personal machine can be seen below.
 ![my_partition_scheme_image](gparted_partitions.png)
 `/dev/sda2` is the main Windows storage partition. The small one to the left is the boot partition, and the small one to the right is the recovery environment. The main storage partition is the only one you want to be resizing. Next, to the left of `/dev/sda6` is the [**swap**](https://help.ubuntu.com/community/SwapFaq) partition which is used to temporarliy store memory from RAM when the RAM is needed elsewhere. `/dev/sda6` is the Ubuntu root partition and `/dev/sda7` is the home directory. Finally, the small grey block on the furthest right is unallocated space. 
 
-#### GPT Disks
+### GPT Disks
 Before resizing your partitions, if your hard drive is > 2 TB you may have a GPT disk and need a [BIOS-Boot or EFI partition](https://help.ubuntu.com/community/DiskSpace#BIOS-Boot_or_EFI_partition_.28required_on_GPT_disks.29). You can check if your disk uses GPT by clicking `View --> Device Information` and looking under the `Partition Table` field if you're using GParted, or `Properties --> Volumes --> Partition Style` [using the Windows disk manager](https://www.howtogeek.com/245610/how-to-check-if-a-disk-uses-gpt-or-mbr-and-how-to-convert-between-the-two/).
 
-#### Partition Schemes
+### Partition Schemes
 Please skim [this guide](https://www.psychocats.net/ubuntu/partitioning) by Psychocats. In particular, the scheme below looks to be ideal except using ext4:
 ![ideal_partition_scheme_image](https://www.psychocats.net/ubuntu/images/partitioning5.png)To use this scheme, you would need to use a [program](https://www.howtogeek.com/112888/3-ways-to-access-your-linux-partitions-from-windows/) in Windows to access the ext4 storage, but you would be able to access the same files from both Windows and Linux. I have not tested this scheme, but I wish I knew about it earlier as having seperate storage between Windows and Linux with my scheme is a real limitation. Having a seperage `/home` partition will allow you to easily re-install Ubuntu without affecting your files.
 
-#### Partition Sizes
+### Partition Sizes
 Choosing the right partition sizes for your machine mainly depends on how much space you have available to allocate. 
 
 Microsoft recommends [minimum 32 GB](https://docs.microsoft.com/en-us/windows-hardware/design/minimum/minimum-hardware-requirements-overview#331-storage-device-size) for Windows 10, version 1903 and up, but realistically, 70+ GB is required and [**at least 128 GB on a SSD**](https://winaero.com/blog/the-real-system-requirements-for-windows-10/) is recommended by some users. 
 
 Ubuntu needs [minimum 8 GB](https://help.ubuntu.com/community/DiskSpace#Root_partition_.28always_required.29) and recommends 15 GB, but in reality needs between **30 - 40 GB**. 
 
-The swap partition should be around:  $$\textsf{round}(\sqrt{\textsf{Size of RAM in GB}})$$ according to [Ubuntu recommendations](https://help.ubuntu.com/community/SwapFaq#How_much_swap_do_I_need.3F). If you feel like you need more later, you may need to upgrade your RAM instead.
+The swap partition should be around:  <img src="https://latex.codecogs.com/svg.latex?\;\textsf{round}(\sqrt{\textsf{Size of RAM in GB}})" title="Swap Size"/> according to [Ubuntu recommendations](https://help.ubuntu.com/community/SwapFaq#How_much_swap_do_I_need.3F). If you feel like you need more later, you may need to upgrade your RAM instead.
 
 Finally, your storage space should take up whatever space is remaining.
 
