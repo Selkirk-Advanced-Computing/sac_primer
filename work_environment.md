@@ -1,7 +1,7 @@
 ﻿# Work Environment
 ## Checklist
 - [ ] Slack
-- [ ] Zoom
+- [ ] Zoom (we have a document already you can copy from)
 - [ ] IDE (VSCode)
 - [ ] Browser
 - [ ] Toggl
