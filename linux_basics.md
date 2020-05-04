@@ -48,6 +48,11 @@ To the left of the cursor you'll see some text in the format `USER_NAME@HOSTNAME
 ## Shortcuts
 Intuitive Windows keyboard shortcuts do not work in the terminal. Copy by highlighting text, then using `Ctrl-C`, paste with `Ctrl-V` and undo with `Ctrl-_`.  There are 3 main types of keyboard shortcuts: local terminal shortcuts configurable in the [preferences menu](#user-interface), [Emacs or Vim shortcuts](https://superuser.com/questions/352983/which-emacs-shortcuts-are-useful-in-bash) (popular text editors. see [==text editors==](#text-editors)) and [line discipline shortcuts](https://unix.stackexchange.com/questions/362559/list-of-terminal-generated-signals-eg-ctrl-c-sigint) (view all line discipline shortcuts with `stty -a`). 
 
+Notes: 
+> in linux, highlingintg text automatically copies it and you can "middle click" to paste
+> `ctrl-c` is typically `kill` (or `sigterm` which i think you go into) 
+> `ctrl-shift-c`/`v` will copy/paste in most terminals if you are too unskilled to use the kill ring, 
+
 The most important 3 shortcuts however, are `Ctrl-c` program interrupting with `SIGINT`, tab completion,  and finally [middle click pasting](https://askubuntu.com/questions/167570/how-does-middle-click-paste-work#167591).
 1. `Ctrl-c` interrupting falls under the line discipline shortcut category and works by sending a `SIGINT` to the program running in the terminal foreground. [Signals](https://www.computerhope.com/unix/signals.htm) are a more advanced topic but [==foreground/background==](#remote-work) will be covered later.
 2. Tab completion is a useful time saving feature of the terminal and is essentially auto-complete for the terminal. The terminal will try to guess what to complete when tapping tab once while typing, and double tapping will show available options for completion. An example is discussed in the [==filesystem==](#filesystem) section.
