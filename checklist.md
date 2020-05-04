@@ -1,0 +1,24 @@
+﻿# Checklist
+- [ ] Dual booting or something like this: [mingw](http://mingw.org/), [cygwin](https://www.cygwin.com/), [msys2](https://www.booleanworld.com/get-unix-linux-environment-windows-msys2/), [bash shell](https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/)
+- [ ] Programs
+	- [ ] Preferred Browser
+	- [ ] Slack
+	- [ ] Zoom
+	- [ ] Toggl
+	- [ ] IDE
+	- [ ] htop
+- [ ] Git
+- [ ] remote work
+	- [ ] SSH
+	- [ ] proxies
+- [ ] Coding
+	- [ ] Python
+	- [ ] Style
+	- [ ] Markdown
+	- [ ] venv
+	- [ ] workflow/agile
+- [ ] Linux
+	- [ ] apt
+	- [ ] filesystem
+	- [ ] man
+	- [ ] vim
